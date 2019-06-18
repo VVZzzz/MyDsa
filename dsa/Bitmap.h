@@ -1,8 +1,8 @@
 #ifndef BITMAP_H_
 #define BITMAP_H_
-#include <memory>
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory>
 
 //简单一维bitmap
 /*
@@ -73,7 +73,65 @@ class Bitmap {  //位图Bitmap类
  public:
   Bitmap(int n = 8) { init(n); }
   //从指定文件中读取bitmap
-  Bitmap(char *file,)
+  Bitmap(char *file, int n = 8) {
+    init(n);
+    FILE *fp;
+    fopen_s(&fp,file, "r");
+    fread(M, sizeof(char), N, fp);
+    fclose(fp);
+  }
+  ~Bitmap() { delete[] M; }
+
+  //将数k存至bitmap中(置位)
+  void set(int k) {
+    expand(k);
+    M[k >> 3] |= (0x80 >> (k & 0x07));
+  }
+
+  //相应复位操作
+  void clear(int k) {
+    expand(k);
+    M[k >> 3] &= ~(0x80 >> (k & 0x07));
+  }
+
+  //查看是否置位
+  bool test(int k) {
+    expand(k);
+    return (M[k >> 3] & (0x80 >> (k & 0x07)));
+  }
+
+  //将位图整体导出至指定的文件，以便对此后的新位图批量初始化
+  void dump(char *file) {
+    FILE *fp;
+    fopen_s(&fp,file, "w");
+    fread(M, sizeof(char), N, fp);
+    fclose(fp);
+  }
+
+  //将前n位转为string
+  char *bits2string(int n) {
+    expand(n - 1);
+    char *s = new char[n + 1];
+    s[n] = '\0';
+    for (int i = 0; i < n; i++) s[i] = (test(i) ? '1' : '0');
+    return s;
+  }
+
+  void expand(int k) {  // Bitmap[k]在范围内,无需扩容
+    if (k < 8 * N) return;
+    //否则,需要扩容
+    int oldN = N;
+    char *oldM = M;
+    init(2 * k);
+    memcpy_s(M, N, oldM, oldN);
+    delete[] oldM;
+  }
+
+  //打印(非必需接口)
+  void print(int n) {
+    expand(n);
+    for (int i = 0; i < n; i++) printf(((test(i)) ? "1" : "0"));
+  }
 };
 
 #endif  // !BITMAP_H_

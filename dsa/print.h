@@ -5,6 +5,7 @@
 #include <typeinfo>
 #include "BinNode.h"
 #include "BinTree.h"
+#include "BST.h"
 
 template <typename T>
 static void print(T* x) {
@@ -40,9 +41,9 @@ class UniPrint {
   static void p(BinNode<T>&);  // BinTree½Úµã
   template <typename T>
   static void p(BinTree<T>&);  //¶þ²æÊ÷
+  template <typename T> static void p ( BST<T>& ); //BST
   /*
   template <typename T> static void p ( BTree<T>& ); //B-Ê÷
-  template <typename T> static void p ( BST<T>& ); //BST
   template <typename T> static void p ( AVL<T>& ); //AVL
   template <typename T> static void p ( RedBlack<T>& ); //RedBlack
   template <typename T> static void p ( Splay<T>& ); //Splay

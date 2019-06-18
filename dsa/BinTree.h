@@ -15,7 +15,7 @@ class BinTree {
  public:
   BinTree() : _size(0), _root(NULL) {}
   ~BinTree() {
-    if (_size > 0) remove(_root);
+    if (_root != NULL ) remove(_root);
   }
   int size() const { return _size; }
   bool empty() const { return !_root; }

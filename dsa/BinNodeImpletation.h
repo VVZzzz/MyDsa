@@ -309,7 +309,7 @@ void BinNode<T>::travPost(VST &visit) {
     //如果是栈顶节点是上一个节点的右兄弟的话(即不是上一个节点的父节点,就两种情况)
     //就继续将它的HLVFL入栈
     if (x->parent != node_stack.top()) {
-      gotoHLVFL<T,VST>(node_stack);
+      gotoHLVFL<T, VST>(node_stack);
     }
     //不是就访问
     x = node_stack.top();
@@ -360,13 +360,16 @@ void strecthByZag(BinNodePosi(T) & x) {
 template <typename T>
 void strecthByZig(BinNodePosi(T) & x, int h) {
   int c = 0;
-  for (BinNodePosi(T) p = x; p = p->rc;) {
+  for (BinNodePosi(T) p = x; p; p = p->rc) {
     while (p->lc) {
-      p = p->zig();     //注意此处和strectchByZag不同,p =
-                        //p->zig.即p会一直往上层走直到顶端
-      p->height = --h;  //之后只剩右子树,相应的h减1
+      p = p->zig();  //注意此处和strectchByZag不同,p =
+                     // p->zig.即p会一直往上层走直到顶端
+      c++;
     }
+    p->height = --h;  //之后只剩右子树,相应的h减1
   }
+  while (x->parent) x = x->parent;
+  
   printf("\nh=%d, c = %d\n\n", h, c);
 }
 

@@ -63,6 +63,15 @@
     <ClInclude Include="BinTree.h">
       <Filter>头文件\struct_header</Filter>
     </ClInclude>
+    <ClInclude Include="BST.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="BSTImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="BSTTest.h">
+      <Filter>头文件\test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">

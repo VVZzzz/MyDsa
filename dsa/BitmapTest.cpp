@@ -1,5 +1,6 @@
 #include "BitmapTest.h"
 
+/*
 int testBitmap(int n) {
   bool* B = new bool[n];
   memset(B, 0, n * sizeof(bool));  //常规位图，创建后随即O(n)时间初始化
@@ -26,3 +27,4 @@ int testBitmap(int n) {
   delete[] B;
   return 0;
 }
+*/

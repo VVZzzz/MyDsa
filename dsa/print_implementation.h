@@ -17,6 +17,7 @@ void UniPrint::p(char e) { printf(" %c", (31 < e) && (e < 128) ? e : '$'); }
 // BinNode节点
 template <typename T>
 void UniPrint::p(BinNode<T>& node) {
+  p(node.data);  //数值
 #if defined(DSA_LEFTHEAP)
   printf("(%-2d)", node.npl);  // NPL
 #elif defined(DSA_BST)
@@ -83,7 +84,9 @@ void UniPrint::p(BinNode<T>& node) {
 #endif
 }
 
-// BinTree打印函数
+/******************************************************************************************
+ * 基础BinTree
+ ******************************************************************************************/
 template <typename T>
 void UniPrint::p(BinTree<T>& bt) {
   printf("%s[%d]*%d:\n", typeid(bt).name(), &bt, bt.size());  //基本信息
@@ -91,6 +94,18 @@ void UniPrint::p(BinTree<T>& bt) {
   printBinTree(bt.root(), -1, ROOT, branchType);  //树状结构
   release(branchType);
   printf("\n");
+}
+
+/******************************************************************************************
+ * 基于BinTree实现的BST
+ ******************************************************************************************/
+template <typename T>
+void UniPrint::p(BST<T>& bt) {
+   printf ( "%s[%d]*%d:\n", typeid ( bt ).name(), &bt, bt.size() ); //基本信息
+   Bitmap* branchType = new Bitmap; //记录当前节点祖先的方向
+   printBinTree ( bt.root(), -1, ROOT, branchType ); //树状结构
+   release ( branchType ); printf ( "\n" );
+
 }
 
 /******************************************************************************************

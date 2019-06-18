@@ -120,6 +120,9 @@
     <ClInclude Include="BinTreeTest.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="BitmapTest.h" />
+    <ClInclude Include="BST.h" />
+    <ClInclude Include="BSTImpletation.h" />
+    <ClInclude Include="BSTTest.h" />
     <ClInclude Include="comparator.h" />
     <ClInclude Include="funcobj.h" />
     <ClInclude Include="print.h" />
