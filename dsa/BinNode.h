@@ -74,5 +74,25 @@ void strecthByZag(BinNodePosi(T) & x);
 template <typename T>
 void strecthByZig(BinNodePosi(T) & x, int h);
 
+/******************AVL树需要的宏**********************/
+//更新x节点高度,空树高度为-1 , 叶子节点高度为0
+#define HeightUpdated(x) \
+  ((x).height == 1 + max(stature((x).lc), stature((x).rc)))
+// x节点是否平衡
+#define Balanced(x) (stature((x).lc) == stature((x).rc))
+//平衡因子
+#define BalFac(x) (stature((x).lc) - stature((x).rc))
+// AVL平衡条件
+#define AvlBalanced(x) (-2 < BalFac(x)) && (BalFac(x) < 2)
+//找到高度较高的子树
+#define tallerChild(x) ( \
+   stature( (x)->lc ) > stature( (x)->rc ) ? (x)->lc : ( /*左高*/ \
+   stature( (x)->lc ) < stature( (x)->rc ) ? (x)->rc : ( /*右高*/ \
+   IsLChild( * (x) ) ? (x)->lc : (x)->rc /*等高：与父亲x同侧者（zIg-zIg或zAg-zAg）优先*/ \
+   ) \
+   ) \
+)
+
+
 #include "BinNodeImpletation.h"
 #endif

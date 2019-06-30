@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AVL.h" />
+    <ClInclude Include="AVLImpletation.h" />
     <ClInclude Include="BinNode.h" />
     <ClInclude Include="BinTree.h" />
     <ClInclude Include="BinTreeTest.h" />
@@ -125,6 +127,9 @@
     <ClInclude Include="BSTTest.h" />
     <ClInclude Include="comparator.h" />
     <ClInclude Include="funcobj.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="GraphImpletation.h" />
+    <ClInclude Include="GraphMatrix.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />

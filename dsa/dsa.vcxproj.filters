@@ -72,6 +72,21 @@
     <ClInclude Include="BSTTest.h">
       <Filter>头文件\test</Filter>
     </ClInclude>
+    <ClInclude Include="AVL.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphMatrix.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">
