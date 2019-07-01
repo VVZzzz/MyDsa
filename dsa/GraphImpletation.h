@@ -85,4 +85,67 @@ void Graph<Tv, Te>::DFS(int s, int &clock) {
   fTime(v) = ++clock;
 }
 
+/**********基于DFS的拓扑排序*************/
+//(BFS同样也可以得到拓扑排序)
+//从s出发进行DFS,将得到的拓扑排序存入栈stack中,栈弹出的顺序即为拓扑排序
+//若有环,则无拓扑排序,stack为空
+template <typename Tv, typename Te>
+stack<Tv> *Graph<Tv, Te>::tSort(int s) {
+  reset();
+  int v = s;
+  int clock = 0;
+  stack<Tv> *pSortStack = new stack<Tv>;
+  do {
+    if (status(v) == UNDISCOVERED) {
+      //如果发现有环,则清空栈,跳出循环.
+      if (!TSort(v, clock, pSortStack)) {
+        while (!pSortStack->empty()) {
+          pSortStack->pop();
+        }
+        break;
+      }
+    }
+  } while (s != (++v) % n);
+}
+
+
+template<typename Tv, typename Te>
+bool Graph<Tv, Te>::TSort(int s, int &clock, stack<Tv>*pSortStack) {
+  int v = s;
+  status(v) = DISCOVERED;
+  dTime(v) = ++clock;
+  for (int u = firstNbr(v); -1 < u; u = nextNbr(v,u)) {
+    switch (status(u)) {
+		//只有UNDISCOVERED的顶点才递归DFS
+      case UNDISCOVERED:
+        type(v, u) = TREE;
+        parent(u) = v;
+        if (!TSort(u, clock, pSortStack)) {
+          return false;
+        }
+        break;
+		//后向边,子代指向父亲,说明有环.
+      case DISCOVERED:
+        type(v, u) = BACKWORD;
+        return false;
+		  break;
+      case VISITED:
+        type(v, u) = (dTime(v) < dTime(u) ? FORWARD : CROSS);
+		  break;
+      default:
+        break;
+    }
+  }
+  //注意只有VISTED的顶点才进栈
+  status(v) = VISITED;
+  pSortStack->push(vertex(v));
+  return true;
+	
+}
+
+/***********基于DFS的双连通域分割(即找割点或叫分支点)**************/
+template<typename Tv, typename Te>
+void Graph<Tv, Te>::bcc(int) {
+
+}
 #endif
