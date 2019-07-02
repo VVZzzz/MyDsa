@@ -67,6 +67,8 @@ class Graph {
   void dfs(int);                      //深度优先搜索算法
   void bcc(int);                      //基于DFS的双连通分量分解算法
   stack<Tv>* tSort(int);              //基于DFS的拓扑排序算法
+  //以下两个都是基于PFS优先级搜索框架
+  //其实都用到的了贪心策略
   void prim(int);                     //最小支撑树Prim算法
   void dijkstra(int);                 //最短路径Dijkstra算法
   template <typename PU>
