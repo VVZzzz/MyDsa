@@ -360,5 +360,40 @@ struct DijkstraPU {
   }
 };
 
+/***************基于PFS搜索框架: BFS更新器********************/
+template <typename Tv,typename Te>
+struct BfsPU {
+  virtual void operator()(Graph<Tv, Te> *g, int s, int u) {
+    if (g->status(u) == UNDISCOVERED) {
+		//即看作边权重都是1,先被发现的顶点,优先级高
+      if (g->priority(u) > g->priority(s) + 1) {
+		  //更新优先级和父节点
+        g->priority(u) = g->priority(s) + 1;
+        g->parent(u) = s;
+      }
+    }
+	  
+  }
+
+};
+
+/**************基于PFS搜索框架: DFS更新器***********************/
+template <typename Tv,typename Te>
+struct DfsPU {
+  virtual void operator()(Graph<Tv, Te> *g, int s, int u) {
+    if (g->status(u) == UNDISCOVERED) {
+		//即看作边权重都是-1,先被发现的顶点,优先级越低
+		//最后被发现的点优先级最高
+      if (g->priority(u) > g->priority(s) - 1) {
+		  //更新优先级和父节点
+        g->priority(u) = g->priority(s) - 1;
+        g->parent(u) = s;
+		return; //注意：与BfsPU()不同，这里只要有一个邻接顶点可更新，即可立即返回
+		//wrh: 这个return应该没有实质性作用. 
+      }
+    }
+	  
+  }
+};
 
 #endif
