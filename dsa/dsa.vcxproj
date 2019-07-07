@@ -125,6 +125,9 @@
     <ClInclude Include="BST.h" />
     <ClInclude Include="BSTImpletation.h" />
     <ClInclude Include="BSTTest.h" />
+    <ClInclude Include="BTImpletation.h" />
+    <ClInclude Include="BTNode.h" />
+    <ClInclude Include="BTree.h" />
     <ClInclude Include="comparator.h" />
     <ClInclude Include="funcobj.h" />
     <ClInclude Include="Graph.h" />

@@ -3,6 +3,8 @@
 #pragma once
 #include "BST.h"
 //伸展树类
+//m次操作共O(mlogn),故均摊时间复杂度为O(logn)
+//伸展树的目的是不想像AVL树那样严格,故无需记录平衡因子等
 template <typename T>
 class Splay : public BST<T> {
  public:
