@@ -234,7 +234,110 @@ bool BTree<T>::remove(const T & e) {
 
  */
 template<typename T>
-void BTree<T>::solveUnderflow(BTNodePosi(T)) {
-	
+void BTree<T>::solveUnderflow(BTNodePosi(T) v) {
+	//如果v的分支数>=(m+1)/2,就返回. 并未下溢(递归基)
+  if ((_order + 1) / 2 <= v->child.size()) return;
+  BTNodePosi(T) p = v->parent;
+  //p为null,则说明已经到达了根节点
+  if (!p) {
+	  //但倘若这个根节点中已经没有关键码了,且只有唯一一个儿子(即上述注释的情况)
+    if (!v->key.size() && v->child[0]) {
+      _root = v->child[0];
+      _root->parent = NULL;
+      v->child[0] = NULL;
+      release(v);
+	  //这样,也是B树高度减一的唯一情况.
+    }
+    return;
+  }
+  //因为有可能节点v之前就一个关键码,被删除了,此时没有关键码
+  //故不能按照关键码找v,必须按照指针
+  int r = 0;
+  while (p->child[r] != v) r++;
+  
+  //情况1: 向左兄弟借关键码
+  if (0 < r) {  //这表明v不是第一个儿子,即必有左兄弟
+    BTNodePosi(T) ls = p->child[r - 1];
+
+	//如果左兄弟有充足的关键码
+    if ((_order + 1) / 2 < ls->child.size()) {
+		//注意旋转
+      v->key.insert(v->key.begin(), p->key[r - 1]);
+      p->key[r - 1] = ls->key.back();
+      ls->key.pop_back();
+	  //同时左兄弟的最后一个儿子过继给v,成为v的第一个儿子
+      v->child.insert(v->child.begin(), ls->child.back());
+      ls->child.pop_back();
+	  //改变这个儿子的父亲
+      if (v->child[0]) v->child[0].parent = v;
+      return;  //至此,已完成该层的下溢
+    }
+  }  //至此,左兄弟为空或者是太瘦
+
+  //情况2: 向右兄弟借关键码
+  if (p->child.size() - 1 > r) {  //有右兄弟
+    BTNodePosi(T) rs = p->child[r + 1];
+	//若右兄弟有充足的关键码
+    if ((_order + 1) / 2 < rs->child.size()) {
+		//注意旋转,将p的对应关键码作为v的最右关键码
+      v->key.push_back(p->key[r]);
+      p->key[r] = rs->key[0];
+      rs->key.erase(rs->key.begin());
+
+      //同时将右兄弟的第一个儿子过继给v,作为v的最后一个儿子
+      v->child.push_back(rs->child[0]);
+      rs->child.pop_back();
+      if (v->child.back()) v->child.back()->parent = v;
+      return;  //至此,已完成该层的下溢
+    }
+  }//至此,左兄弟为空或者是太瘦
+
+  //情况3: 左右兄弟都没有足够的关键码,只能让父节点的关键码下来并且合并.(或者左右兄弟为空(不可能同时))
+  if (0 < r) {  //与左兄弟合并
+    BTNodePosi(T) ls = p->child[r - 1];
+    //将p的[r-1]关键码转入左兄弟,并且p的[r]儿子(也就是v)不在是p的[r]儿子
+    ls->key.push_back(p->key[r - 1]);
+    p->key.erase(p->key.begin() + (r - 1));
+    p->child.erase(p->child.begin() + r);
+
+    //同时v的最左儿子(第一个儿子)过继给此时的左兄第,作为左兄弟的
+    ls->child.push_back(v->child[0]);
+    v->child.erase(v->child.begin());
+    if (ls->child.back()) ls->child.back()->parent = ls;
+    
+    //v剩余的关键码与儿子依次转入左兄第
+    for (auto& ele : v->key) ls->key.push_back(ele);
+    for (auto& elechild : v->child) {
+      ls->child.push_back(elechild);
+      if (ls->child.back()) ls->child.back()->parent = ls;
+    }
+    v->key.clear();
+    v->child.clear();
+    release(v);
+  } else {  //与右兄弟合并
+    BTNodePosi(T) rs = p->child[r + 1];
+    //将p的[r]关键码转入右兄弟,并且p的[r]儿子(也就是v)不在是p的[r]儿子
+    rs->key.insert(rs->key.begin(), p->key[r]);
+    p->key.erase(p->key.begin() + r);
+    p->child.erase(p->child.begin() + r);
+
+    //v的最右孩子过继给rs,作为rs的最左孩子
+    rs->child.insert(rs->child.begin(), v->child.back());
+    v->child.pop_back();
+    if (rs->child[0]) rs->child[0]->parent = rs;
+
+    //v剩余的关键码和孩子依次转入右兄弟
+    for (auto itr = v->key.rbegin(); itr != v->key.rend(); itr++)
+      rs->key.insert(rs->key.begin(), *itr);
+    for (auto itr = v->child.rbegin(); itr != v->child.rend(); itr++) {
+      rs->child.insert(rs->child.begin(), *itr);
+      if (rs->child[0]) rs->child[0]->parent = rs;
+    }
+
+    release(v);
+  }
+
+  solveUnderflow(p);  //上升一层进行下溢(即发生合并时,可能p节点也要下溢,所以要递归上一层)
+  return;
 }
 #endif
