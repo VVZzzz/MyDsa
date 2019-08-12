@@ -102,6 +102,18 @@
     <ClInclude Include="BTImpletation.h">
       <Filter>头文件\struct_impletation</Filter>
     </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="Entry.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTableImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">

@@ -129,10 +129,14 @@
     <ClInclude Include="BTNode.h" />
     <ClInclude Include="BTree.h" />
     <ClInclude Include="comparator.h" />
+    <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="Entry.h" />
     <ClInclude Include="funcobj.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphImpletation.h" />
     <ClInclude Include="GraphMatrix.h" />
+    <ClInclude Include="HashTable.h" />
+    <ClInclude Include="HashTableImpletation.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />
