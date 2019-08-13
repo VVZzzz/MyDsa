@@ -137,6 +137,7 @@
     <ClInclude Include="GraphMatrix.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="HashTableImpletation.h" />
+    <ClInclude Include="Huffman.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="BinNodeImpletation.h" />
     <ClCompile Include="BinTreeImpletation.h" />
     <ClCompile Include="BitmapTest.cpp" />
+    <ClCompile Include="Huffman_PQ.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

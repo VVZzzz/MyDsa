@@ -20,16 +20,23 @@ static size_t hashCode(
   // a0.....a1即每个字符的值,x为常系数
 }  //对于英语单词，"循环左移5位"是实验统计得出的最佳值
 
+bool isPrime(int n) { 
+  int p = sqrt(n); 
+  for (int i = 2; i < p; i++)
+    if (n % i == 0) return false;
+  return true;
+}
+
 //得到一个最靠近n的素数,素数有个特点,就是它等于6x+1或者6x-1
-static int getPrim(int n) { 
+static int getPrime(int n) { 
   int j = 0;
   int mul = 0;
   while (true) {
-    if ((mul = j * 6 + 1) >= n) break;
-    if ((mul = j * 6 + 5) >= n) break;
+    if ((mul = j * 6 + 1) >= n)
+      if (isPrime(mul)) return mul;
+    if ((mul = j * 6 + 5) >= n)
+      if (isPrime(mul)) return mul;
   }
-
-  
 }
 
 template <typename K, typename V>
@@ -84,9 +91,15 @@ template <typename K, typename V>
 void HashTable<K, V>::rehash() {
   int old_capacity = M;
   Entry<K, V>** old_ht = hashtable;
-  M = 2*M
-  
-
+  M = getPrime(M);
+  N = 0;
+  hashtable = new Entry<K, V>*[M](nullptr);
+  release(lazyRemoval);
+  lazyRemoval = new Bitmap(M);  //创建新的懒惰标记比特图
+  for (int i = 0; i < old_capacity; i++) {
+    if (old_ht[i]) put(old_ht[i]->key, old_ht[i]->value);
+  }
+  release(old_ht);
 }
 
 template <typename K, typename V>

@@ -114,6 +114,9 @@
     <ClInclude Include="HashTableImpletation.h">
       <Filter>头文件\struct_impletation</Filter>
     </ClInclude>
+    <ClInclude Include="Huffman.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">
@@ -126,6 +129,9 @@
       <Filter>头文件\struct_impletation</Filter>
     </ClCompile>
     <ClCompile Include="BinNodeImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClCompile>
+    <ClCompile Include="Huffman_PQ.cpp">
       <Filter>头文件\struct_impletation</Filter>
     </ClCompile>
   </ItemGroup>
