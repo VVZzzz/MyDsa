@@ -117,6 +117,18 @@
     <ClInclude Include="Huffman.h">
       <Filter>头文件\struct_header</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="PQ.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="PQ_ComplHeap.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">

@@ -138,12 +138,16 @@
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="HashTableImpletation.h" />
     <ClInclude Include="Huffman.h" />
+    <ClInclude Include="PQ.h" />
+    <ClInclude Include="PQ_ComplHeap.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />
     <ClInclude Include="release.h" />
     <ClInclude Include="SPlay.h" />
     <ClInclude Include="Splay_Impletation.h" />
+    <ClInclude Include="Vector.h" />
+    <ClInclude Include="VectorImpletation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinNodeImpletation.h" />
