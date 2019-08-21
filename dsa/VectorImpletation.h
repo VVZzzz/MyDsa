@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector.h"
+#include "PQ_ComplHeap.h"
 template <typename T>
 void Vector<T>::copyFrom(T const* A, Rank lo, Rank hi) {
   _elem = new T[_capacity = 2 * (hi - lo)];
@@ -114,6 +115,37 @@ template <typename T>
 void Vector<T>::selectionSort(Rank lo, Rank hi) {
      while ( lo < --hi )
       swap ( _elem[max ( lo, hi ) ], _elem[hi] ); //将[hi]与[lo, hi]中的最大者交换
+}
+
+//堆排序,就地算法空间O(1),时间为O(nlogn)
+//步骤是先floyd建堆,消耗时间O(n),之后依次delMax(),将最大值放在数组的末尾.故为O(nlogn)
+/*
+ * 4 2 5 1 3
+ *        4
+ *      2   5
+ *    1  3
+ * 建堆后: 
+ *        5
+ *      3   4
+ *    1  2
+ * 
+ * [5 3 4 1 2] -> delMax
+ *        4
+ *      3   2
+ *    1  
+ *  
+ * [4 3 2 1] 5  -> 其中5已处在正确位置上...依次类推
+ * 1 2 3 4 5
+ * 这也是为何从小到大排序,需要大根堆的原因
+ */
+//[lo,hi)
+template <typename T>
+void Vector<T>::heapSort(Rank lo, Rank hi) {
+  PQ_ComplHeap<T> H(_elem + lo, hi - lo);
+  while (H.empty()) {  //反复地摘除最大元并归入已排序的后缀，直至堆空
+    _elem[--hi] = H.delMax();
+  }
+  
 }
 
 template<typename T>
