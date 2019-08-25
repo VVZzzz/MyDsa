@@ -141,6 +141,8 @@
     <ClInclude Include="PQ.h" />
     <ClInclude Include="PQ_ComplHeap.h" />
     <ClInclude Include="PQ_ComplHeapImpletation.h" />
+    <ClInclude Include="PQ_LeftHeap.h" />
+    <ClInclude Include="PQ_LeftHeap_Impletation.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />

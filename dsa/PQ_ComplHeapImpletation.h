@@ -187,5 +187,8 @@ Rank PQ_ComplHeap<T>::percolateDown(Rank n, Rank i) {
  */
 template <typename T>
 void PQ_ComplHeap<T>::heapify(Rank n) {
+  for (int i = LastInternal(n); InHeap(n, i); i--) {
+    percolateDown(n, i);  //依次下滤内部节点
+  }
   
 }

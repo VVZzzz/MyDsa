@@ -132,6 +132,12 @@
     <ClInclude Include="PQ_ComplHeapImpletation.h">
       <Filter>头文件\struct_impletation</Filter>
     </ClInclude>
+    <ClInclude Include="PQ_LeftHeap.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="PQ_LeftHeap_Impletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">
