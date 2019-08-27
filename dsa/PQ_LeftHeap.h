@@ -56,7 +56,7 @@ class PQ_LeftHeap : public PQ<T>, public BinTree<T> {
   void insert(T);  //按照比较器确定的优先级次序插入词条
   //取出优先级最高的词条
   T getMax() { return _root->data; }
-  T delMax() = 0;      //删除优先级最高的词条
+  T delMax();      //删除优先级最高的词条
 
  private:
    //合并两个左式堆的merge算法

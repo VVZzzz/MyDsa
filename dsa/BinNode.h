@@ -15,12 +15,13 @@ struct BinNode {
   BinNodePosi(T) parent;
   BinNodePosi(T) lc;
   BinNodePosi(T) rc;
-  int height;
+  int height;  //高度,通用
+  int npl;  //Null Path Length,左式堆用
   //构造函数
-  BinNode() : parent(NULL), lc(NULL), rc(NULL), height(0) {}
+  BinNode() : parent(NULL), lc(NULL), rc(NULL), height(0),npl(1) {}
   BinNode(T e, BinNodePosi(T) p = NULL, BinNodePosi(T) l = NULL,
-          BinNodePosi(T) r = NULL, int h = 0)
-      : data(e), parent(p), lc(l), rc(r), height(h) {}
+          BinNodePosi(T) r = NULL, int h = 0,int l = 1)
+      : data(e), parent(p), lc(l), rc(r), height(h),npl(l) {}
   //操作接口
   int size();
   BinNodePosi(T) insertAsLC(const T &);  //插入到当前节点的左子节点
