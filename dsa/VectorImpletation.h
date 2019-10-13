@@ -255,6 +255,7 @@ int Vector<T>::uniquify() {
 }
 
 
+
 template <typename T> void Vector<T>::traverse ( void ( *visit ) ( T& ) ) //借助函数指针机制
 { for ( int i = 0; i < _size; i++ ) visit ( _elem[i] ); } //遍历向量
 
@@ -262,4 +263,61 @@ template <typename T> template <typename VST> //元素类型、操作器
 void Vector<T>::traverse ( VST& visit ) //借助函数对象机制
 { for ( int i = 0; i < _size; i++ ) visit ( _elem[i] ); } //遍历向量
 
-    
+
+//轴点构造算法:通过调整元素位置构造区间[lo, hi]的轴点，并返回其秩
+template <typename T>
+Rank Vector<T>::partition(Rank lo, Rank hi) {
+}
+
+//版本A:基本形式,即始终保持[0,lo]<= pivot <= [hi,size)
+template <typename T>
+void Vector<T>::partition_A(Rank lo, Rank hi) {    //[lo,hi]
+  swap(_elem[lo], _elem[lo + rand() % (hi - lo + 1)]);//任选一个元素与首元素交换
+  T pivot = _elem[lo];  //以首元素为候选轴点——经以上交换，等效于随机选取轴点
+  while (lo<hi) {
+    while (lo < hi && pivot <= _elem[hi]) hi--;  //向左拓展右端子向量
+    _elem[lo] = _elem[hi];  //小于pivot者归入左侧子序列
+    while (lo < hi && _elem[lo] <= pivot) lo++;  //向右拓展左端子向量
+    _elem[hi] = _elem[lo];  //大于pivot者归入右侧子序列
+  }  //assert lo==hi
+  _elem[lo] = pivot;  //将备份的轴点放在正确的位置上.
+  return lo;  //返回轴点的秩
+}
+
+//版本B,优化了基本版本的退化情况
+//即如果所有元素都是重复相同的,此时基本版本的会达到最坏情况,即返回的轴点秩为0
+//这样就造成不平衡
+//版本B与版本A的不同点在将pivot<=_elem[hi] 改为 pivot<_elem[hi]
+//这样就导致"勤于交换,懒于拓展"与版本A正好相反
+template<typename T>
+void Vector<T>::partition_B(Rank lo, Rank hi) { //版本B：可优化处理多个关键码雷同的退化情况
+  swap(_elem[lo], _elem[lo + rand() % (hi - lo + 1)]);//任选一个元素与首元素交换
+  T pivot = _elem[lo];  //以首元素为候选轴点——经以上交换，等效于随机选取轴点
+  while (lo<hi) {
+    while (lo<hi) {
+      if (pivot < _elem[hi]) hi--; //向左拓展右端子向量
+      else {
+        _elem[lo++] = _elem[hi];  //小于pivot者归入左侧子序列
+        break;
+      }
+    }
+    while (lo<hi) {
+      if (_elem[lo] < pivot) lo++; //向右拓展左端子向量
+      else {
+        _elem[hi--] = _elem[lo];  //大于pivot者归入右侧子序列
+        break;
+      }
+    }
+  }  //assert lo==hi
+  _elem[lo] = pivot;  //将备份的轴点放在正确的位置上.
+  return lo;  //返回轴点的秩
+}
+
+//快速排序,O(nlogn),为什么快,因为常系数小,为O(2ln2logn)=O(1.386logn)
+template<typename T>
+void Vector<T>::quickSort(Rank lo, Rank hi) { //[lo,hi)
+  if (hi - lo < 2) return; //单元素区间自然有序
+  Rank mi = partition(lo, hi - 1);
+  quickSort(lo, mi);  //对前缀递归排序
+  quickSort(mi + 1, hi);  //对后缀递归排序
+}

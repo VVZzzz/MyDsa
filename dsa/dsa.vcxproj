@@ -149,6 +149,7 @@
     <ClInclude Include="release.h" />
     <ClInclude Include="SPlay.h" />
     <ClInclude Include="Splay_Impletation.h" />
+    <ClInclude Include="StringMatch.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VectorImpletation.h" />
   </ItemGroup>
