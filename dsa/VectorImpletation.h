@@ -267,11 +267,13 @@ void Vector<T>::traverse ( VST& visit ) //½èÖúº¯Êı¶ÔÏó»úÖÆ
 //Öáµã¹¹ÔìËã·¨:Í¨¹ıµ÷ÕûÔªËØÎ»ÖÃ¹¹ÔìÇø¼ä[lo, hi]µÄÖáµã£¬²¢·µ»ØÆäÖÈ
 template <typename T>
 Rank Vector<T>::partition(Rank lo, Rank hi) {
+  return partition_A(lo, hi);
+  //return partition_B(lo, hi);
 }
 
 //°æ±¾A:»ù±¾ĞÎÊ½,¼´Ê¼ÖÕ±£³Ö[0,lo]<= pivot <= [hi,size)
 template <typename T>
-void Vector<T>::partition_A(Rank lo, Rank hi) {    //[lo,hi]
+Rank Vector<T>::partition_A(Rank lo, Rank hi) {    //[lo,hi]
   swap(_elem[lo], _elem[lo + rand() % (hi - lo + 1)]);//ÈÎÑ¡Ò»¸öÔªËØÓëÊ×ÔªËØ½»»»
   T pivot = _elem[lo];  //ÒÔÊ×ÔªËØÎªºòÑ¡Öáµã¡ª¡ª¾­ÒÔÉÏ½»»»£¬µÈĞ§ÓÚËæ»úÑ¡È¡Öáµã
   while (lo<hi) {
@@ -290,7 +292,7 @@ void Vector<T>::partition_A(Rank lo, Rank hi) {    //[lo,hi]
 //°æ±¾BÓë°æ±¾AµÄ²»Í¬µãÔÚ½«pivot<=_elem[hi] ¸ÄÎª pivot<_elem[hi]
 //ÕâÑù¾Íµ¼ÖÂ"ÇÚÓÚ½»»»,ÀÁÓÚÍØÕ¹"Óë°æ±¾AÕıºÃÏà·´
 template<typename T>
-void Vector<T>::partition_B(Rank lo, Rank hi) { //°æ±¾B£º¿ÉÓÅ»¯´¦Àí¶à¸ö¹Ø¼üÂëÀ×Í¬µÄÍË»¯Çé¿ö
+Rank Vector<T>::partition_B(Rank lo, Rank hi) { //°æ±¾B£º¿ÉÓÅ»¯´¦Àí¶à¸ö¹Ø¼üÂëÀ×Í¬µÄÍË»¯Çé¿ö
   swap(_elem[lo], _elem[lo + rand() % (hi - lo + 1)]);//ÈÎÑ¡Ò»¸öÔªËØÓëÊ×ÔªËØ½»»»
   T pivot = _elem[lo];  //ÒÔÊ×ÔªËØÎªºòÑ¡Öáµã¡ª¡ª¾­ÒÔÉÏ½»»»£¬µÈĞ§ÓÚËæ»úÑ¡È¡Öáµã
   while (lo<hi) {
@@ -314,10 +316,11 @@ void Vector<T>::partition_B(Rank lo, Rank hi) { //°æ±¾B£º¿ÉÓÅ»¯´¦Àí¶à¸ö¹Ø¼üÂëÀ×Í
 }
 
 //¿ìËÙÅÅĞò,O(nlogn),ÎªÊ²Ã´¿ì,ÒòÎª³£ÏµÊıĞ¡,ÎªO(2ln2logn)=O(1.386logn)
+//²¢²»ÊÇÎÈ¶¨ÅÅĞò
 template<typename T>
 void Vector<T>::quickSort(Rank lo, Rank hi) { //[lo,hi)
   if (hi - lo < 2) return; //µ¥ÔªËØÇø¼ä×ÔÈ»ÓĞĞò
-  Rank mi = partition(lo, hi - 1);
+  Rank mi = partition(lo, hi - 1);  //ÓĞÁ½¸öÖÃµØËã·¨,ËùĞè¿Õ¼äÎªO(1)
   quickSort(lo, mi);  //¶ÔÇ°×ºµİ¹éÅÅĞò
   quickSort(mi + 1, hi);  //¶Ôºó×ºµİ¹éÅÅĞò
 }
