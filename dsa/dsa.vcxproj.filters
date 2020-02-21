@@ -138,6 +138,15 @@
     <ClInclude Include="PQ_LeftHeap_Impletation.h">
       <Filter>头文件\struct_impletation</Filter>
     </ClInclude>
+    <ClInclude Include="StringMatch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Selection.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="Majority.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">

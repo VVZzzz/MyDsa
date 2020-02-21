@@ -61,8 +61,8 @@ public:
    void traverse ( void (* ) ( T& ) ); //遍历（使用函数指针，只读或局部性修改）
    template <typename VST> void traverse ( VST& ); //遍历（使用函数对象，可全局性修改）
 // 多个版本的轴点构造算法
-   void partition_A(Rank lo, Rank hi);  //基本版本
-   void partition_B(Rank lo, Rank hi);  //版本B,优化
+   Rank partition_A(Rank lo, Rank hi);  //基本版本
+   Rank partition_B(Rank lo, Rank hi);  //版本B,优化
 }; //Vector
 
 #include "VectorImpletation.h"

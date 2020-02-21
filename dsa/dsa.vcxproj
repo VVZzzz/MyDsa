@@ -138,6 +138,7 @@
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="HashTableImpletation.h" />
     <ClInclude Include="Huffman.h" />
+    <ClInclude Include="Majority.h" />
     <ClInclude Include="PQ.h" />
     <ClInclude Include="PQ_ComplHeap.h" />
     <ClInclude Include="PQ_ComplHeapImpletation.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />
     <ClInclude Include="release.h" />
+    <ClInclude Include="Selection.h" />
     <ClInclude Include="SPlay.h" />
     <ClInclude Include="Splay_Impletation.h" />
     <ClInclude Include="StringMatch.h" />
