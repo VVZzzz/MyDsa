@@ -147,6 +147,8 @@
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
     <ClInclude Include="rand.h" />
+    <ClInclude Include="RBTree.h" />
+    <ClInclude Include="RBTree_Impletation.h" />
     <ClInclude Include="release.h" />
     <ClInclude Include="Selection.h" />
     <ClInclude Include="SPlay.h" />

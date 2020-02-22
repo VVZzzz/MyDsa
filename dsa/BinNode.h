@@ -7,6 +7,7 @@
 //此文件是二叉树节点类
 #define BinNodePosi(T) BinNode<T> *
 #define stature(p) ((p) ? (p)->height : -1)
+typedef enum { RB_RED, RB_BLACK } RBColor;  //节点颜色(红黑树)
 
 template <typename T>
 struct BinNode {
@@ -17,11 +18,12 @@ struct BinNode {
   BinNodePosi(T) rc;
   int height;  //高度,通用
   int npl;  //Null Path Length,左式堆用
+  RBColor color;  //颜色
   //构造函数
-  BinNode() : parent(NULL), lc(NULL), rc(NULL), height(0),npl(1) {}
+  BinNode() : parent(NULL), lc(NULL), rc(NULL), height(0),npl(1) ,color(RB_RED){}
   BinNode(T e, BinNodePosi(T) p = NULL, BinNodePosi(T) l = NULL,
-          BinNodePosi(T) r = NULL, int h = 0,int l = 1)
-      : data(e), parent(p), lc(l), rc(r), height(h),npl(l) {}
+          BinNodePosi(T) r = NULL, int h = 0,int l = 1,RBColor c = RB_RED)
+      : data(e), parent(p), lc(l), rc(r), height(h),npl(l) ,color(c){}
   //操作接口
   int size();
   BinNodePosi(T) insertAsLC(const T &);  //插入到当前节点的左子节点
@@ -93,6 +95,14 @@ void strecthByZig(BinNodePosi(T) & x, int h);
    ) \
    ) \
 )
+
+/***********************红黑树需要的宏************************/
+#define IsBlack(p) (!p || (RB_RED == (p)->color))  //外部节点(即空节点)也为黑节点
+#define IsRed(p) (!(IsBlack(p)))
+//红黑树高度更新条件
+#define BlackHeightUpdated(x)             \
+  (stature((x).lc) == stature((x).rc)) && \
+      ((x).height = (IsRed(&(x)) ? stature((x).lc) : stature((x).lc) + 1))
 
 
 #include "BinNodeImpletation.h"
