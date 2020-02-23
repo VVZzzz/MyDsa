@@ -146,11 +146,17 @@
     <ClInclude Include="PQ_LeftHeap_Impletation.h" />
     <ClInclude Include="print.h" />
     <ClInclude Include="print_implementation.h" />
+    <ClInclude Include="Quadlist.h" />
+    <ClInclude Include="QuadlistImpletation.h" />
+    <ClInclude Include="QuadlistNode.h" />
+    <ClInclude Include="QuadlistNodeImpletation.h" />
     <ClInclude Include="rand.h" />
     <ClInclude Include="RBTree.h" />
     <ClInclude Include="RBTree_Impletation.h" />
     <ClInclude Include="release.h" />
     <ClInclude Include="Selection.h" />
+    <ClInclude Include="SkipList.h" />
+    <ClInclude Include="SkipListImpletation.h" />
     <ClInclude Include="SPlay.h" />
     <ClInclude Include="Splay_Impletation.h" />
     <ClInclude Include="StringMatch.h" />

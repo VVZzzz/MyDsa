@@ -147,6 +147,30 @@
     <ClInclude Include="Majority.h">
       <Filter>头文件\struct_header</Filter>
     </ClInclude>
+    <ClInclude Include="RBTree.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="RBTree_Impletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipList.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipListImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadlist.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadlistNode.h">
+      <Filter>头文件\struct_header</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadlistNodeImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadlistImpletation.h">
+      <Filter>头文件\struct_impletation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BitmapTest.cpp">
