@@ -66,12 +66,12 @@ DataStructures-Algorithms -cpp
    - buildHeap(vector<T>)建堆策略
    - lazyDeleteMin懒惰策略
 8. SkipList
-  - size()
-  - level()//层高
-  - put(K, V);  //插入（注意与Map有别——Skiplist允许词条重复，故必然成功）
-  - get(K k);  //读取
-  - remove(K k);  //删除
+   - size()
+   - level()//层高
+   - put(K, V);  //插入（注意与Map有别——Skiplist允许词条重复，故必然成功）
+   - get(K k);  //读取
+   - remove(K k);  //删除
 9. B树
-  - 增,删,改,查
+   - 增,删,改,查
 10. Huffman编码树
 11. 优先队列
